@@ -38,10 +38,14 @@ public class ChatClientTest {
 
     @Test
     public void viewOnline() throws IOException {
+        Response response1 = ChatClient.login(MY_NAME_IN_CHAT);
         Response response = ChatClient.viewOnline();
         System.out.println("[" + response + "]");
-        System.out.println(response.body().string());
-        Assert.assertEquals(200, response.code());
+
+        String responseBody = response.body().string();
+        System.out.println(responseBody);
+
+        Assert.assertTrue(response.code() == 200 && responseBody.equals(MY_NAME_IN_CHAT));
     }
 
     @Test
@@ -50,5 +54,47 @@ public class ChatClientTest {
         System.out.println("[" + response + "]");
         System.out.println(response.body().string());
         Assert.assertEquals(200, response.code());
+    }
+
+    @Test
+    public void logout() throws IOException {
+        Response response1 = ChatClient.login(MY_NAME_IN_CHAT);
+        System.out.println("[" + response1 + "]");
+        Response response = ChatClient.logout(MY_NAME_IN_CHAT);
+        System.out.println("[" + response + "]");
+        System.out.println(response.body().string());
+        Assert.assertEquals(200, response.code());
+    }
+
+    @Test
+    public void deleteHistory() throws IOException {
+        Response response = ChatClient.deleteChatHistory();
+        System.out.println("[" + response + "]");
+
+        String body = response.body().string();
+        System.out.println(body);
+        Assert.assertTrue(response.code() == 200 && body.equals("History deleted!"));
+    }
+
+    @Test
+    public void getRandomLogin() throws IOException {
+        Response response = ChatClient.getRandomLogin();
+        System.out.println("[" + response + "]");
+
+        String[] suggestions = {"newUser", "Hello123", "myFirstLogin", "test123"};
+
+        String body = response.body().string();
+
+        boolean foundInSuggestions = false;
+
+        for (int i = 0; i < suggestions.length; i++) {
+           if (body.equals(suggestions[i])) {
+               foundInSuggestions = true;
+               break;
+           }
+        }
+
+        System.out.println(body);
+        Assert.assertTrue(response.code() == 200 && foundInSuggestions);
     }
 }

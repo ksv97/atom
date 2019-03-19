@@ -114,7 +114,7 @@ public class ChatController {
     public ResponseEntity deleteHistory() {
         messages.clear();
 
-        return ResponseEntity.ok("Messages deleted successfully!");
+        return ResponseEntity.ok("History deleted!");
     }
 
     @RequestMapping(

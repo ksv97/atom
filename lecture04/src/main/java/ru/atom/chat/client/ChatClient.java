@@ -83,4 +83,5 @@ public class ChatClient {
                 .url(PROTOCOL + HOST + PORT + "/chat/randlogin")
                 .build();
         return client.newCall(request).execute();
+    }
 }
