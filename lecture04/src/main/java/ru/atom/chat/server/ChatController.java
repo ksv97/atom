@@ -59,16 +59,79 @@ public class ChatController {
     /**
      * curl -X POST -i localhost:8080/chat/logout -d "name=I_AM_STUPID"
      */
-    //TODO
+    @RequestMapping(
+            path = "logout",
+            method = RequestMethod.POST,
+            produces = MediaType.TEXT_PLAIN_VALUE
+    )
+    public ResponseEntity logout(@RequestParam("name") String name) {
+        if (usersOnline.containsKey(name)) {
+            usersOnline.remove(name);
+            return ResponseEntity.ok("User " + name + " successfully logged out!");
+        }
+
+        return ResponseEntity.badRequest().body("User " + name + " is not exists");
+    }
 
     /**
      * curl -X POST -i localhost:8080/chat/say -d "name=I_AM_STUPID&msg=Hello everyone in this chat"
      */
-    //TODO
+    @RequestMapping(
+            path = "say",
+            method = RequestMethod.POST,
+            produces = MediaType.TEXT_PLAIN_VALUE
+    )
+    public ResponseEntity say(@RequestParam("name") String name, @RequestParam("msg") String msg) {
+        if (usersOnline.containsKey(name)) {
+            messages.add("(" + name + "): " + msg);
+            return ResponseEntity.ok("(" + name + "): " + msg);
+        } else {
+            return ResponseEntity.badRequest().body("User with name " + name + " is not found");
+        }
+    }
 
 
     /**
      * curl -i localhost:8080/chat/chat
      */
-    //TODO
+    @RequestMapping(
+            path = "chat",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_PLAIN_VALUE
+    )
+    public ResponseEntity chat() {
+        String responseBody = String.join("\n", messages);
+
+        return ResponseEntity.ok(responseBody);
+    }
+
+
+    @RequestMapping(
+            path = "deletechat",
+            method = RequestMethod.DELETE,
+            produces = MediaType.TEXT_PLAIN_VALUE
+    )
+    public ResponseEntity deleteHistory() {
+        messages.clear();
+
+        return ResponseEntity.ok("Messages deleted successfully!");
+    }
+
+    @RequestMapping(
+            path = "randlogin",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_PLAIN_VALUE
+    )
+    public ResponseEntity getRandomLogin() {
+
+        int a = 0;
+        int b = 3;
+
+        String[] suggestions = {"newUser", "Hello123", "myFirstLogin", "test123"};
+
+        int index = a + (int) (Math.random() * b);
+        String login = suggestions[index];
+
+        return ResponseEntity.ok(login);
+    }
 }
