@@ -88,10 +88,10 @@ public class ChatClientTest {
         boolean foundInSuggestions = false;
 
         for (int i = 0; i < suggestions.length; i++) {
-           if (body.equals(suggestions[i])) {
-               foundInSuggestions = true;
-               break;
-           }
+            if (body.equals(suggestions[i])) {
+                foundInSuggestions = true;
+                break;
+            }
         }
 
         System.out.println(body);
