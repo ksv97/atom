@@ -124,12 +124,12 @@ public class ChatController {
     )
     public ResponseEntity getRandomLogin() {
 
-        int a = 0;
-        int b = 3;
+        int intervalStart = 0;
+        int intervalEnd = 3;
 
         String[] suggestions = {"newUser", "Hello123", "myFirstLogin", "test123"};
 
-        int index = a + (int) (Math.random() * b);
+        int index = intervalStart + (int) (Math.random() * intervalEnd);
         String login = suggestions[index];
 
         return ResponseEntity.ok(login);
