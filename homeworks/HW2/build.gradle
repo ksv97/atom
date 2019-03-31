@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'checkstyle'
 }
 
 group 'ru.ex'
@@ -19,10 +18,3 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.26'
     compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.11.2'
 }
-
-checkstyle {
-    ignoreFailures = false
-    toolVersion = '7.5'
-    configFile = new File('../../config/checkstyle/checkstyle.xml')
-}
-

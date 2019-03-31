@@ -36,7 +36,7 @@ public class Tests {
 
     @Test
     public void notNull() throws Exception {
-        WordProv wp = new WordProv();
+        WordProvider wp = new WordProvider();
         assertThat(wp.getWord(), is(not(equals(null))));
     }
 

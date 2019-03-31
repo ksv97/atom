@@ -41,7 +41,7 @@ public class Main {
 
         logger.debug("Logger started");
 
-        WordProv wordProv = new WordProv();
+        WordProvider wordProv = new WordProvider();
         String hiddenWord = wordProv.getWord();
         //System.out.println(hiddenWord);
 

@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 
-public class WordProv {
+public class WordProvider {
 
     public String getWord() {
         Scanner scanner = null;
